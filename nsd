@@ -1,0 +1,38 @@
+#include <iostream>
+
+// Функція для знаходження НСД двох чисел за допомогою алгоритму Євкліда
+int gcd(int a, int b) {
+    while (b != 0) {
+        int t = b;
+        b = a % b;
+        a = t;
+    }
+    return a;
+}
+
+// Функція для знаходження НСД для k натуральних чисел
+int gcd_k(int* numbers, int k) {
+    int gcd_result = numbers[0];
+    for (int i = 1; i < k; i++) {
+        gcd_result = gcd(gcd_result, numbers[i]);
+    }
+    return gcd_result;
+}
+
+int main() {
+    int k;
+    std::cout << "Введіть кількість чисел k: ";
+    std::cin >> k;
+
+    int* numbers = new int[k];
+    std::cout << "Введіть " << k << " чисел: ";
+    for (int i = 0; i < k; i++) {
+        std::cin >> numbers[i];
+    }
+
+    int result = gcd_k(numbers, k);
+    std::cout << "Найбільший спільний дільник: " << result << std::endl;
+
+    delete[] numbers;
+    return 0;
+}
